@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
-import 'semantic-ui-css/semantic.min.css'
+// import './index.css';
+// import 'semantic-ui-css/semantic.min.css'
 
 import { Provider } from 'react-redux';
 import { RootReducer } from './Reducers/RootReducer';
