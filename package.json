@@ -1,5 +1,7 @@
 {
   "name": "go_explorin",
+  "description": "An Ionic project",
+  "author": "Ryan Riesenberger & Will Vega",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -39,6 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "An Ionic project"
+  }
 }
