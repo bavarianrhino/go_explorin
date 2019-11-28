@@ -6,18 +6,17 @@ import * as serviceWorker from './serviceWorker';
 // import './index.css';
 // import 'semantic-ui-css/semantic.min.css'
 
+
 import { Provider } from 'react-redux';
 import { RootReducer } from './Reducers/RootReducer';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 
-const store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)));
+// const store = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+        <App />,
     document.getElementById('root')
 );
 
