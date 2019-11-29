@@ -1,24 +1,42 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
+
+import { appConfig } from '../../utils/constants'; //appConfig
+import { UserSession } from 'blockstack'
 
 const Login: React.FC = () => {
 
+    useIonViewWillEnter(() => {
+        console.log('ionViewWillEnter event fired')
+        // const { userSession } = this.state
+        // const { state } = this.state
+        console.log(UserSession)
+        console.log(appConfig)
+
+        // if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
+        //     const userData = userSession.handlePendingSignIn()
+
+        //     if (!userData) {
+        //         throw new Error('This app requires a username')
+        //     }
+        //         console.log("Need to link this to a route to")
+        // }
+    })
+
     function ryan() {
-          console.log("Need to link this to a route to")
-          return null;
+        console.log("Login Page Fired")
+        return null;
     };
 
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>GoExplorin</IonTitle>
+                    <IonTitle>Login With Blockstack</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-                <h2>Hello Blockstack!!</h2>
-                <p>The world is your oyster....but more importantly it's a garden...dig it.</p>
-                <p>If you get lost, the{' '}<a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/">ionic docs</a>{' '}will be your guide.</p>
+                <button>Login</button>
                 {ryan()}
             </IonContent>
         </IonPage>

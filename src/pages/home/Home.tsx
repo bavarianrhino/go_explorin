@@ -1,64 +1,94 @@
 import React, { Component } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import 'Home/Home.css'
-type State = {
-    username: string | null,
-    password: string | null,
-}
-userSession: new UserSession({ appConfig })
+import { RouteComponentProps } from 'react-router'
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonFab, IonFabButton, IonIcon, withIonLifeCycle } from '@ionic/react';
+import { add } from 'ionicons/icons'
 
-export default class Home extends Component<{},State> {
-    signupFormRef: React.Ref<HTMLFormElement>
+import { appConfig } from '../../utils/constants'; //appConfig
+import { UserSession } from 'blockstack'
+
+import { connect } from 'react-redux';
+
+import { Plugins } from '@capacitor/core';
+
+// import 'Home.css'
+
+const Home: React.FC<RouteComponentProps> = (props) => {
+    // signupFormRef: React.Ref<HTMLFormElement>
   
-    constructor(props: {}) {
-        super(props);
-            this.state = {
-                username: null,
-                password: null
-            }
+    // constructor(props: {}) {
+    //     super(props);
+    //         this.state = {
+    //             username: null,
+    //             password: null
+            // }
 
-        this.signupFormRef = React.createRef();
-    }
+    //     this.signupFormRef = React.createRef();
+    // }
 
-    ionViewWillEnter () {
-        console.log('ionViewWillEnter event fired')
+
+    // state = {
+        // userSession: new UserSession({ appConfig })
+    // }
+
+    // ionViewWillEnter = async () => {
+    //     console.log('Home Page Fired')
+    //     console.log(UserSession, "Before Sign In")
+    //     console.log(appConfig, "Before Sign In")
+
+    //     const { userSession } = this.state
+        
+    //     if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
+    //         const userData = await userSession.handlePendingSignIn()
+    //         console.log(userData)
+    //     }
+    // }
+
+    function handleSignIn () {
         // const { userSession } = this.state
-        const { state } = this.state
+        const userSession = new UserSession({ appConfig })
         console.log(userSession)
-
-        if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
-            const userData = userSession.handlePendingSignIn()
-
-            if (!userData) {
-                throw new Error('This app requires a username')
-            }
-                console.log("Need to link this to a route to")
-        }
+        userSession.redirectToSignIn()
     }
 
-  
-    onSignup() {}
-    render() {
-    return (
-        <>
+    // function handleDeviceInfo () async{
+    const handleDeviceInfo = async function () {
+        const { Device } = Plugins;
+
+        // return await Device.getInfo();
+        const info = await Device.getInfo();
+        console.log(info);
+    }
+
+    // ryan() {retun <button></button>}
+
+    // render() {
+        return (
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>GoExplorin</IonTitle>
+                        <IonTitle>Home</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="ion-padding">
-                    <h2>Hello Blockstack!!</h2>
-                    <p>The world is your oyster....but more importantly it's a garden...dig it.</p>
-                    <p>If you get lost, the{' '}<a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/">ionic docs</a>{' '}will be your guide.</p>
-                    {ryan()}
+                <IonFab vertical="bottom" horizontal="start" slot="fixed">
+                        <IonFabButton onClick={handleDeviceInfo}>
+                            <IonIcon icon={add} />
+                        </IonFabButton>
+                    </IonFab>
+                    <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                        <IonFabButton onClick={handleSignIn}>
+                            <IonIcon icon={add} />
+                        </IonFabButton>
+                    </IonFab>
                 </IonContent>
             </IonPage>
-        </>
-    );
-};
+        )
+    }
+// }
 
 export default Home;
+// export default withIonLifeCycle(React.forwardRef(null, {})(Home));
+{/* <IonFabButton onClick={() => props.history.push('/login')}></IonFabButton> */}
 
 // class App extends React.Component {
 

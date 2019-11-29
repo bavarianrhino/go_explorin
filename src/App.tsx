@@ -6,7 +6,7 @@ import { withIonLifeCycle } from '@ionic/react';
 // IonHeader, IonPage, IonToolbar, IonTitle, IonContent,
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
-import Map from './pages/map/map';
+import Map from './pages/map/Map';
 
 // Blockstack
 import { appConfig } from './utils/constants'; //appConfig
@@ -31,23 +31,26 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-    const App: React.FunctionComponent = () => (
-        <IonApp>
-            <IonReactRouter>
-                <IonPage>
+    // const App: React.FunctionComponent = () => {
+    class App extends React.Component {
+        // const isAuthed = true;
+        render (){
+        return (
+            <IonApp>
+                <IonReactRouter>
                     <IonRouterOutlet>
                         <Route path="/home" component={Home} exact={true} />
-                        <Route path="/map/map" component={Map} />
-                        <Route path="/login/login" component={Login} />
+                        <Route path="/login" component={Login} />
                         <Route exact path="/" render={() => <Redirect to="/home" />} />
                     </IonRouterOutlet>
-                </IonPage>
-            </IonReactRouter>
-        </IonApp>
-    )
-    // }
+                </IonReactRouter>
+            </IonApp>
+        )
+    }
+    }
 // }
 
   export default connect(null, {})(App);
+//   export default withIonLifeCycle(connect(null, {})(App));
 // export default withIonLifeCycle(App);
 

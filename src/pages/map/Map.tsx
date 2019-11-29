@@ -3,10 +3,10 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 
 const Map: React.FC = () => {
 
-    function ryan() {
-          console.log("Map Page Fired")
-          return null;
-    };
+    // function ryan() {
+    //       console.log("Map Page Fired")
+    //       return null;
+    // };
 
     return (
         <IonPage>
@@ -16,8 +16,7 @@ const Map: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-                <h2>Display Map Here</h2>
-                {ryan()}
+                <h2>Map</h2>
             </IonContent>
         </IonPage>
     );
