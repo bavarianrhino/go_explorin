@@ -1,5 +1,7 @@
 {
   "name": "go_explorin",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
