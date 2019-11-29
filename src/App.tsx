@@ -50,7 +50,7 @@ import './theme/variables.css';
     }
 // }
 
-  export default connect(null, {})(App);
+  export default connect(null, {})(withIonLifeCycle(App));
 //   export default withIonLifeCycle(connect(null, {})(App));
 // export default withIonLifeCycle(App);
 
