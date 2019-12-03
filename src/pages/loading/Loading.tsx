@@ -1,7 +1,10 @@
 import React from 'react';
 import { IonProgressBar, IonContent, IonSpinner } from '@ionic/react';
 
-const Loading: React.FC = () => (
+// export const Loading: React.FC = () => (
+    export default class Login extends React.Component {
+        render(){
+            return (
   <IonContent>
       <IonSpinner name="crescent" />
     {/*-- Default Progressbar --*/}
@@ -19,6 +22,7 @@ const Loading: React.FC = () => (
     {/* <IonProgressBar type="indeterminate"></IonProgressBar><br /> */}
     {/* <IonProgressBar type="indeterminate" reversed={true}></IonProgressBar><br /> */}
   </IonContent>
-);
+            )}}
 
-export default Loading
+// export default Loading
+

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { IonApp, IonPage, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel, IonIcon } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { withIonLifeCycle } from '@ionic/react';
@@ -36,104 +37,103 @@ import './theme/variables.css';
 import { share, map } from 'ionicons/icons';
 import { locate } from 'ionicons/icons';
 import { close } from 'ionicons/icons';
+import { attachProps } from '@ionic/react/dist/types/components/utils/attachProps';
 
     // const App: React.FunctionComponent = () => {
+    // interface AppProps extends RouteComponentProps<{userSession: string;}> {}
+
     class App extends React.Component {
 
         state = {
             userSession: new UserSession({ appConfig }),
             loading: true,
             userData: {}
-            // userSession:
-            // signedIn: false
         }
 
-    ionViewWillEnter () {
-        // this.setState({
-            // userSession: new UserSession({ appConfig })
-        // })
-        // this.getUserSession()
-        // this.userSignedIn()
-    }
-
-    redirectSignIn = () => {
+    // ionViewWillEnter = async () => {
+    //     await this.userSignedIn()
+    // }
+    ionViewWillEnter = async () => {
         const { userSession } = this.state
-        userSession.redirectToSignIn()
-        return false
-    }
 
-    userPendingSignIn = async () => {
-    // async userPendingSignIn () {
-        const { userSession } = this.state
-        // const userData = await userSession.handlePendingSignIn()
-        // await Promise.all([
-            try {
-                await userSession.handlePendingSignIn()
-                
-              } catch(err) {
-                  userSession.redirectToSignIn()
-                // alert(err); // TypeError: failed to fetch
-              }
-        // const hist = new History()
-        // new History.call().
-        // const userData1 = await userSession.handlePendingSignIn()
-    }
+        if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
+            const userData = await userSession.handlePendingSignIn()
 
-    userSignedIn = async () => {
-        const { userSession } = this.state
-        const userData1 = userSession.isUserSignedIn()
-        const userData2 = userSession.isSignInPending()
-        console.log(userData1, " - Signed In?")
-        console.log(userData2, " - Pending Sign In?")
-        if(userData1){
-            // this.setState({ loading: false})
-            return true
-        }
-        if((!userData1 && !userData2) || (!userData1 && userData2)) {
-            
-            try {
-                await this.userPendingSignIn()
-            } catch (err) {
-                await this.userPendingSignIn()
+            debugger
+
+            if (!userData.username) {
+                throw new Error('This app requires a username')
             }
-            if((!userData1 && !userData2) || (!userData1 && userData2)) {
-            
-                try {
-                    await this.userPendingSignIn()
-                } catch (err) {
-                    await this.userPendingSignIn()
-                }
-                if(userData1){
-                    // this.setState({ loading: false})
-                    return true
-                }
-            }
+            debugger
         }
-        // if(!userData1 && !userData2) {
-        //     // this.userPendingSignIn()
-        //     this.redirectSignIn()
-        //     // this.userPendingSignIn()
-        //     return false
-        // }
-        // return false
     }
+
+    // redirectSignIn = () => {
+    //     const { userSession } = this.state
+    //     userSession.redirectToSignIn()
+    //     return false
+    // }
+
+    // userPendingSignIn = async () => {
+    //     const { userSession } = this.state
+    //     try {
+    //         await userSession.handlePendingSignIn()
+            
+    //     } catch(err) {
+    //         userSession.redirectToSignIn()
+    //     }
+    // }
+
+    // userSignedIn = async () => {
+    //     const { userSession } = this.state
+    //     const userData1 = userSession.isUserSignedIn()
+    //     const userData2 = userSession.isSignInPending()
+    //     console.log(userData1, " - Signed In?")
+    //     console.log(userData2, " - Pending Sign In?")
+    //     // if(userData1){
+    //     //     // this.setState({ loading: false})
+    //     //     return true
+    //     // }
+    //     if((!userData1 && !userData2) || (!userData1 && userData2)) {
+            
+    //         try {
+    //             await this.userPendingSignIn()
+    //         } catch (err) {
+    //             await this.userPendingSignIn()
+    //         }
+    //         if((!userData1 && !userData2) || (!userData1 && userData2)) {
+            
+    //             try {
+    //                 await this.userPendingSignIn()
+    //             } catch (err) {
+    //                 await this.userPendingSignIn()
+    //             }
+    //             if(userData1){
+    //                 this.setState({ loading: false})
+    //                 return true
+    //             }
+    //         }
+    //     }
+    // }
 
                 
         render (){
-            // this.userSignedIn()
+            const userSession = new UserSession({ appConfig })
         return (
             <IonApp>
                 {/* {(!this.userSignedIn()) ? <Loading /> : */}
+                {(!userSession.isUserSignedIn()) ? <Login userSession={userSession} history={this.props} /> :
                 <IonReactRouter>
                     <IonTabs>
                         <IonRouterOutlet>
-                            <Route path="/login" component={Login} exact={true} />
-                            {/* <Route path="/loading" component={Loading} exact={true} /> */}
+                            {/* <Route path="/login" component={Login} exact={true} /> */}
+                            {/* <Route path="/login" render={(props) => <Login userSession={this.state.userSession} />} /> */}
+                            <Route path="/loading" component={Loading} exact={true} />
                             <Route path="/map" component={Mapp} exact={true} />
                             <Route path="/LeaderBoard" component={LeaderBoard} exact={true} />
-                            {/* <Route path="/" render={() => <Redirect to="/loading" />} exact={true} /> */}
+                            <Route path="/" render={() => <Redirect to="/LeaderBoard" />} exact={true} />
                             {/* <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} /> */}
-                            <Route path="/" render={() => (!this.userSignedIn() ? <Redirect to="/loading" /> : <Redirect to="/map" />)} exact={true} />
+                            {/* <Route path="/" render={(props) => (!userSession.isUserSignedIn() ? <Login userSession={userSession} /> : <Redirect to="/map" /> )} /> */}
                         </IonRouterOutlet>
                         <IonTabBar slot="bottom">
                             <IonTabButton tab="tab1" href="/login">
@@ -150,14 +150,14 @@ import { close } from 'ionicons/icons';
                             </IonTabButton>
                         </IonTabBar>
                     </IonTabs>
-                </IonReactRouter>
+                </IonReactRouter>}
             </IonApp>
         )
     }
     }
 // }
 
-  export default connect(null, {setUserSession})(withIonLifeCycle(App));
+// export default connect(null, {setUserSession})(withIonLifeCycle(App));
 //   export default withIonLifeCycle(connect(null, {})(App));
-// export default withIonLifeCycle(App);
+export default withIonLifeCycle(App);
 
