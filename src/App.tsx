@@ -42,7 +42,8 @@ import { close } from 'ionicons/icons';
 
         state = {
             userSession: new UserSession({ appConfig }),
-            loading: true
+            loading: true,
+            userData: {}
             // userSession:
             // signedIn: false
         }
@@ -62,11 +63,20 @@ import { close } from 'ionicons/icons';
     }
 
     userPendingSignIn = async () => {
+    // async userPendingSignIn () {
         const { userSession } = this.state
         // const userData = await userSession.handlePendingSignIn()
-        const data = await userSession.handlePendingSignIn()
-        return false
-        // this.setState({ loading: false})
+        // await Promise.all([
+            try {
+                await userSession.handlePendingSignIn()
+                
+              } catch(err) {
+                  userSession.redirectToSignIn()
+                // alert(err); // TypeError: failed to fetch
+              }
+        // const hist = new History()
+        // new History.call().
+        // const userData1 = await userSession.handlePendingSignIn()
     }
 
     userSignedIn = async () => {
@@ -79,99 +89,34 @@ import { close } from 'ionicons/icons';
             // this.setState({ loading: false})
             return true
         }
-        if(!userData1 && userData2) {
-            this.userPendingSignIn()
-                // .then((res) => this.setState({ loading: false}))
-                // .then((res) => true)
-            // if(userData1){
-            //     this.setState({ loading: false})
-            //     return true
-            // }
-            return false
+        if((!userData1 && !userData2) || (!userData1 && userData2)) {
+            
+            try {
+                await this.userPendingSignIn()
+            } catch (err) {
+                await this.userPendingSignIn()
+            }
+            if((!userData1 && !userData2) || (!userData1 && userData2)) {
+            
+                try {
+                    await this.userPendingSignIn()
+                } catch (err) {
+                    await this.userPendingSignIn()
+                }
+                if(userData1){
+                    // this.setState({ loading: false})
+                    return true
+                }
+            }
         }
-        if(!userData1 && !userData2) {
-            // this.userPendingSignIn()
-            this.redirectSignIn()
-            // this.userPendingSignIn()
-            return false
-        }
+        // if(!userData1 && !userData2) {
+        //     // this.userPendingSignIn()
+        //     this.redirectSignIn()
+        //     // this.userPendingSignIn()
+        //     return false
+        // }
         // return false
     }
-
-    // redirectSignIn = () => {
-        // const { userSession } = this.state
-        // userSession.redirectToSignIn()
-        // return false
-    // }
-
-    // userPendingSignIn = async () => {
-    //     const { userSession } = this.state
-    //     const userData1 = userSession.isUserSignedIn()
-    //     const userData2 = userSession.isSignInPending()
-    //     const userData3 = userSession.getAuthResponseToken()
-    //     const userData4 = userSession.generateAndStoreTransitKey()
-    //     console.log(userData1, " - Signed In?")
-    //     console.log(userData2, " - Pending Sign In?")
-    //     console.log(userData3, " - KEY")
-    //     console.log(userData4, " - KEY")
-    //     // const userData = await userSession.handlePendingSignIn()
-    //     const userData = await userSession.handlePendingSignIn()
-    //     return false
-    //     // return false
-    //     // this.setState({ loading: false})
-    // }
-
-    // userSignedIn = () => {
-    //     const { userSession } = this.state
-    //     const userData1 = userSession.isUserSignedIn()
-    //     const userData2 = userSession.isSignInPending()
-    //     const userData3 = userSession.getAuthResponseToken()
-    //     const userData4 = userSession.generateAndStoreTransitKey()
-    //     console.log(userData1, " - Signed In?")
-    //     console.log(userData2, " - Pending Sign In?")
-    //     console.log(userData3, " - KEY")
-    //     console.log(userData4, " - KEY")
-    //     if(!userData1 && !userData2) {
-    //         // this.userPendingSignIn()
-    //         // debugger
-    //         userSession.redirectToSignIn()
-    //         // userSession.redirectToSignInWithAuthRequest()
-    //         // this.userPendingSignIn()
-    //         return false
-    //         // console.log(History)
-    //     }
-    //     else if(!userData1 && userData2) {
-    //         // userSession.redirectToSignIn()
-    //         // const userData1 = await this.userPendingSignIn().then(console.log)
-    //         // console.log(History)
-    //         const { userSession } = this.state
-    //     const userData1 = userSession.isUserSignedIn()
-    //     const userData2 = userSession.isSignInPending()
-    //     const userData3 = userSession.getAuthResponseToken()
-    //     const userData4 = userSession.generateAndStoreTransitKey()
-    //     console.log(userData1, " - Signed In?")
-    //     console.log(userData2, " - Pending Sign In?")
-    //     console.log(userData3, " - KEY")
-    //     console.log(userData4, " - KEY")
-    //     this.userPendingSignIn()
-    //         .then((res) => {
-    //             return true
-    //         })
-    //     // debugger
-    //         // console.log(userData)
-    //         // this.userPendingSignIn()
-    //             // .then((res) => this.setState({ loading: false}))
-    //             // .then((res) => true)
-    //         // return true
-    //     }
-    //     if(userData1){
-    //         // this.setState({ loading: false})
-    //         return true
-    //     }
-    //     // this.setState({ loading: true})
-    //     // console.log("XXXXXXXXXXXXXXXX")
-    //     return false
-    // }
 
                 
         render (){
@@ -183,12 +128,12 @@ import { close } from 'ionicons/icons';
                     <IonTabs>
                         <IonRouterOutlet>
                             <Route path="/login" component={Login} exact={true} />
-                            <Route path="/loading" component={Loading} exact={true} />
+                            {/* <Route path="/loading" component={Loading} exact={true} /> */}
                             <Route path="/map" component={Mapp} exact={true} />
                             <Route path="/LeaderBoard" component={LeaderBoard} exact={true} />
-                            {/* <Route path="/" render={() => <Redirect to="/login" />} exact={true} /> */}
-                            <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} />
-                            {/* <Route path="/" render={() => (!this.userSignedIn() ? <Redirect to="/loading" /> : <Redirect to="/map" />)} exact={true} /> */}
+                            {/* <Route path="/" render={() => <Redirect to="/loading" />} exact={true} /> */}
+                            {/* <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} /> */}
+                            <Route path="/" render={() => (!this.userSignedIn() ? <Redirect to="/loading" /> : <Redirect to="/map" />)} exact={true} />
                         </IonRouterOutlet>
                         <IonTabBar slot="bottom">
                             <IonTabButton tab="tab1" href="/login">
@@ -206,7 +151,6 @@ import { close } from 'ionicons/icons';
                         </IonTabBar>
                     </IonTabs>
                 </IonReactRouter>
-                {/* } */}
             </IonApp>
         )
     }
