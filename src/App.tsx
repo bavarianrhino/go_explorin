@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import Mapp from './pages/map/Mapp';
 import LeaderBoard from './pages/leaderboard/LeaderBoard';
 import Loading from './pages/loading/Loading';
+import Logout from './pages/logout/Logout';
 
 // Blockstack
 import { appConfig } from './utils/constants'; //appConfig
@@ -50,9 +51,6 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
             userData: {}
         }
 
-    // ionViewWillEnter = async () => {
-    //     await this.userSignedIn()
-    // }
     ionViewWillEnter = async () => {
         const { userSession } = this.state
 
@@ -67,56 +65,7 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
             debugger
         }
     }
-
-    // redirectSignIn = () => {
-    //     const { userSession } = this.state
-    //     userSession.redirectToSignIn()
-    //     return false
-    // }
-
-    // userPendingSignIn = async () => {
-    //     const { userSession } = this.state
-    //     try {
-    //         await userSession.handlePendingSignIn()
-            
-    //     } catch(err) {
-    //         userSession.redirectToSignIn()
-    //     }
-    // }
-
-    // userSignedIn = async () => {
-    //     const { userSession } = this.state
-    //     const userData1 = userSession.isUserSignedIn()
-    //     const userData2 = userSession.isSignInPending()
-    //     console.log(userData1, " - Signed In?")
-    //     console.log(userData2, " - Pending Sign In?")
-    //     // if(userData1){
-    //     //     // this.setState({ loading: false})
-    //     //     return true
-    //     // }
-    //     if((!userData1 && !userData2) || (!userData1 && userData2)) {
-            
-    //         try {
-    //             await this.userPendingSignIn()
-    //         } catch (err) {
-    //             await this.userPendingSignIn()
-    //         }
-    //         if((!userData1 && !userData2) || (!userData1 && userData2)) {
-            
-    //             try {
-    //                 await this.userPendingSignIn()
-    //             } catch (err) {
-    //                 await this.userPendingSignIn()
-    //             }
-    //             if(userData1){
-    //                 this.setState({ loading: false})
-    //                 return true
-    //             }
-    //         }
-    //     }
-    // }
-
-                
+           
         render (){
             const userSession = new UserSession({ appConfig })
         return (
@@ -128,17 +77,17 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
                         <IonRouterOutlet>
                             {/* <Route path="/login" component={Login} exact={true} /> */}
                             {/* <Route path="/login" render={(props) => <Login userSession={this.state.userSession} />} /> */}
-                            <Route path="/loading" component={Loading} exact={true} />
-                            <Route path="/map" component={Mapp} exact={true} />
                             <Route path="/LeaderBoard" component={LeaderBoard} exact={true} />
-                            <Route path="/" render={() => <Redirect to="/LeaderBoard" />} exact={true} />
+                            <Route path="/map" component={Mapp} exact={true} />
+                            <Route path="/logout" component={Logout} exact={true} />
+                            <Route path="/" render={() => <Redirect to="/map" />} exact={true} />
                             {/* <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} /> */}
                             {/* <Route path="/" render={(props) => (!userSession.isUserSignedIn() ? <Login userSession={userSession} /> : <Redirect to="/map" /> )} /> */}
                         </IonRouterOutlet>
                         <IonTabBar slot="bottom">
-                            <IonTabButton tab="tab1" href="/login">
+                            <IonTabButton tab="tab1" href="/LeaderBoard">
                                 <IonIcon icon={share} />
-                                <IonLabel>Login</IonLabel>
+                                <IonLabel>Leader Board</IonLabel>
                             </IonTabButton>
                             <IonTabButton tab="tab2" href="/map">
                                 <IonIcon icon={locate} />
