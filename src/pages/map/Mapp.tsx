@@ -1,13 +1,28 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { appConfig } from '../../utils/constants'; //appConfig
+import { UserSession } from 'blockstack'
 
-const Map: React.FC = () => {
+// const Map: React.FC = () => {
+    class Map extends React.Component {
 
-    // function ryan() {
-    //       console.log("Map Page Fired")
-    //       return null;
-    // };
+        // state = {
+        //     userSession: new UserSession({ appConfig }),
+        //     signedIn: false
+        // }
 
+
+    ryan() {
+          console.log("Map Page Fired")
+        //   console.log(localStorage)
+        //   console.log(localStorage.getItem('blockstack-session'))
+        //   const data = this.state.userSession.loadUserData()
+        //   console.log(data)
+          return null;
+    };
+
+    render (){
+        this.ryan()
     return (
         <IonPage>
             <IonHeader>
@@ -21,5 +36,6 @@ const Map: React.FC = () => {
         </IonPage>
     );
 };
+    }
 
 export default Map;

@@ -43,21 +43,21 @@ const Home: React.FC<RouteComponentProps> = (props) => {
     //     }
     // }
 
-    function handleSignIn () {
-        // const { userSession } = this.state
-        const userSession = new UserSession({ appConfig })
-        console.log(userSession)
-        userSession.redirectToSignIn()
-    }
+    // function handleSignIn () {
+    //     // const { userSession } = this.state
+    //     const userSession = new UserSession({ appConfig })
+    //     console.log(userSession)
+    //     userSession.redirectToSignIn()
+    // }
 
     // function handleDeviceInfo () async{
-    const handleDeviceInfo = async function () {
-        const { Device } = Plugins;
+    // const handleDeviceInfo = async function () {
+    //     const { Device } = Plugins;
 
-        // return await Device.getInfo();
-        const info = await Device.getInfo();
-        console.log(info);
-    }
+    //     // return await Device.getInfo();
+    //     const info = await Device.getInfo();
+    //     console.log(info);
+    // }
 
     // ryan() {retun <button></button>}
 
@@ -71,12 +71,12 @@ const Home: React.FC<RouteComponentProps> = (props) => {
                 </IonHeader>
                 <IonContent className="ion-padding">
                 <IonFab vertical="bottom" horizontal="start" slot="fixed">
-                        <IonFabButton onClick={handleDeviceInfo}>
+                        <IonFabButton >
                             <IonIcon icon={add} />
                         </IonFabButton>
                     </IonFab>
                     <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                        <IonFabButton onClick={handleSignIn}>
+                        <IonFabButton >
                             <IonIcon icon={add} />
                         </IonFabButton>
                     </IonFab>
