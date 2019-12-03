@@ -12,6 +12,23 @@ const Login: React.FC = () => {
         // const { state } = this.state
         console.log(UserSession)
         console.log(appConfig)
+    })
+
+    function handleSignIn () {
+        // const { userSession } = this.state
+        const userSession = new UserSession({ appConfig })
+        console.log(userSession)
+        userSession.redirectToSignIn()
+    }
+
+    // function handleDeviceInfo () async{
+    // const handleDeviceInfo = async function () {
+        // const { Device } = Plugin;
+
+        // return await Device.getInfo();
+        // const info = await Device.getInfo();
+        // console.log(info);
+    // }
 
         // if (!userSession.isUserSignedIn() && userSession.isSignInPending()) {
         //     const userData = userSession.handlePendingSignIn()
@@ -21,7 +38,6 @@ const Login: React.FC = () => {
         //     }
         //         console.log("Need to link this to a route to")
         // }
-    })
 
     function ryan() {
         console.log("Login Page Fired")
@@ -36,7 +52,7 @@ const Login: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-                <button>Login</button>
+                <button onClick={handleSignIn}>Login</button>
                 {ryan()}
             </IonContent>
         </IonPage>
