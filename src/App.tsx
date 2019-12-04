@@ -7,7 +7,7 @@ import { withIonLifeCycle } from '@ionic/react';
 // IonHeader, IonPage, IonToolbar, IonTitle, IonContent,
 
 import Login from './pages/login/Login';
-import Mapp from './pages/map/Mapp';
+import MappView from './pages/map/MappView';
 import LeaderBoard from './pages/leaderboard/LeaderBoard';
 import Loading from './pages/loading/Loading';
 import Logout from './pages/logout/Logout';
@@ -78,7 +78,7 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
                             {/* <Route path="/login" component={Login} exact={true} /> */}
                             {/* <Route path="/login" render={(props) => <Login userSession={this.state.userSession} />} /> */}
                             <Route path="/LeaderBoard" component={LeaderBoard} exact={true} />
-                            <Route path="/map" component={Mapp} exact={true} />
+                            <Route path="/map" component={MappView} exact={true} />
                             <Route path="/logout" component={Logout} exact={true} />
                             <Route path="/" render={() => <Redirect to="/map" />} exact={true} />
                             {/* <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} /> */}
