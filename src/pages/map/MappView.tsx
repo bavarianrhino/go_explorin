@@ -27,10 +27,10 @@ const MappView: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
 
-        <IonContent class="map-page">
-            {/* <Map locations={locations} mapCenter={mapCenter} /> */}
-            <Mapp />
-        </IonContent>
+            <IonContent class="map-page">
+                {/* <Map locations={locations} mapCenter={mapCenter} /> */}
+                <Mapp />
+            </IonContent>
         </IonPage>
     )};
 
