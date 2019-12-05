@@ -6,6 +6,7 @@ import { UserSession } from 'blockstack';
 import { useParams } from 'react-router';
 import { useStore } from 'react-redux';
 import { appConfig } from '../../utils/constants'; //appConfig
+import { BlockstackButton } from 'react-blockstack-button';
 
 
 // const Login: React.FC = () => {
@@ -100,7 +101,8 @@ export default class Login extends React.Component {
                 {(loading) ? <Loading /> : 
                 (this.state.userSession.isSignInPending()) ? (this.handleClick2(null)) :
                 <IonContent className="ion-padding" style={{ '--offset-top': '-40%' }}>
-                    <IonButton shape="round" expand="block" fill="outline" color="tertiary" onClick={e => {e.preventDefault(); this.handleClick2(e); }}>Blockstack Login</IonButton>
+                    {/* <IonButton shape="round" expand="block" fill="outline" color="tertiary" onClick={e => {e.preventDefault(); this.handleClick2(e); }}>Blockstack Login</IonButton> */}
+                    <BlockstackButton onClick={e => {this.handleClick2(e)}} />
                 </IonContent>}
             </IonPage>
         )

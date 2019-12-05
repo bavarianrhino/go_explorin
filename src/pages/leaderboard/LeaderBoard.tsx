@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonFab, IonFabButton, IonIcon, withIonLifeCycle } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { add } from 'ionicons/icons'
+// import { appConfig } from '../../utils/constants'; //appConfig
+// import { UserSession } from 'blockstack'
+// import { connect } from 'react-redux';
+// import { Plugins } from '@capacitor/core';
 
-import { appConfig } from '../../utils/constants'; //appConfig
-import { UserSession } from 'blockstack'
 
-import { connect } from 'react-redux';
 
-import { Plugins } from '@capacitor/core';
 
 // import 'Home.css'
 
@@ -88,7 +88,7 @@ const Home: React.FC<RouteComponentProps> = (props) => {
 
 export default Home;
 // export default withIonLifeCycle(React.forwardRef(null, {})(Home));
-{/* <IonFabButton onClick={() => props.history.push('/login')}></IonFabButton> */}
+/* <IonFabButton onClick={() => props.history.push('/login')}></IonFabButton> */
 
 // class App extends React.Component {
 

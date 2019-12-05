@@ -1,8 +1,8 @@
 {
   "appId": "com.vegadevshop.explorin",
-  "appName": "explorin",
+  "appName": "goexplorin",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "public",
+  "webDir": "build",
   "cordova": {}
 }

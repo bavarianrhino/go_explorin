@@ -1,101 +1,132 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Plugins } from '@capacitor/core';
+import { IonContent } from '@ionic/react';
+import { withIonLifeCycle } from '@ionic/react';
+// import { GOOGMAPKEY } from '../../utils/data';
+// import { MAPBOXKEY } from '../../utils/data';
 // import { Location } from '../models/Location';
 
 // interface MapProps {
 //   locations: Location[]
 //   mapCenter: Location
 // }
-
 // const Map: React.FC<MapProps> = ({ mapCenter, locations }) => {
+
+
 class Mapp extends React.Component {
 
     state = {
         coords: {
             latitude: 0,
             longitude: 0
+        },
+        watchId : "somestring",
+        watchId2 : "somestring"  
+    }
+
+    ionViewWillEnter() {
+        this.ionViewWillEnterLog()
+        this.getPosition()
+        this.lookAtPosition()
+        this.lookAtPosition2()
+        this.nonCapacitorGetPosition()
+    }
+
+    ionViewWillLeave() {
+        this.ionViewWillLeaveLog()
+    }
+
+    ionViewDidEnter() {
+        this.ionViewDidEnterLog()
+    }
+
+    ionViewDidLeave() {
+        this.ionViewDidLeaveLog()
+    }
+
+    ionViewWillEnterLog = () => { console.log('xxxxxxxxxxionViewWillEnterLogxxxxxxxxxxxx')}
+    ionViewWillLeaveLog = () => { console.log('xxxxxxxxxxionViewWillLeaveLogxxxxxxxxxxxx')}
+    ionViewDidEnterLog = () => { console.log('xxxxxxxxxxionViewDidEnterLogxxxxxxxxxxxx')}
+    ionViewDidLeaveLog = () => { console.log('xxxxxxxxxxionViewDidLeaveLogxxxxxxxxxxxx')}
+    
+    async requestPermissions() {
+        // const permResult = await Plugins.Geolocation.requestPermissions();
+    }
+    
+    async getPosition() {
+        try {
+            const coordinates = await Plugins.Geolocation.getCurrentPosition()
+            // this.setState({
+            //     ...this.state,
+            //     coords: {
+            //         latitude: coordinates.coords.latitude,
+            //         longitude: coordinates.coords.longitude
+            //     }
+            // })
+            console.log('Current', coordinates);
+        } catch(error) {
+            console.error('Error occurred. Error code: ' + error.code);
         }
-        // mapEle: useRef<HTMLDivElement>(null),
-        // map: useRef<google.maps.Map>()        
     }
 
-    
-    
-    getCurrentPosition = async () => {
-
-        // const mapEle = useRef<HTMLDivElement>(null)
-        // const map = useRef<google.maps.Map>()
-        const { Geolocation } = Plugins;
-        const coordinates = await Geolocation.getCurrentPosition();
-        this.setState({
-            ...this.state,
-            coords: {
-                latitude: coordinates.coords.latitude,
-                longitude: coordinates.coords.longitude
-            }
-        })
-        console.log('Latitude', coordinates.coords.latitude);
-        console.log('Longitude', coordinates.coords.longitude);
-        console.log('Coords', this.state.coords);
-
-        return coordinates
+    nonCapacitorGetPosition = async () => {
+        try {
+            const name = await navigator.geolocation.getCurrentPosition(position => {
+            }, error => {
+                console.error('Error occurred. Error code: ' + error.code);
+            }, {
+                timeout: 1000,
+                maximumAge: 10000,
+                enableHighAccuracy: true
+            })
+        } catch (error) {
+            console.error('Error occurred. Error code: ' + error.code);
+        }
     }
-        
-        // const watchPosition = () => {
-        //     const wait = Geolocation.watchPosition({}, (position, err) => {
 
-        //     })
-        // }
-    // }
-
-    // this.state.map.current = new google.maps.Map(this.state.mapEle.current, {
-    //     center: {
-    //         lat: mapCenter.lat,
-    //         lng: mapCenter.lng
-    //     },
-    //     zoom: 16
-    // });
+    // //stop watching after 10 seconds
+        // setTimeout(() => {
+        //   navigator.geolocation.clearWatch(id)
+        // }, 10 * 1000)
+    
+    lookAtPosition() {
+        try {
+            this.state.watchId = Plugins.Geolocation.watchPosition({
+                enableHighAccuracy: false,
+                maximumAge: 10000,
+                requireAltitude: false,
+                timeout: 500000
+            }, (position, error) => {
+                console.log("watchLocation1", position.coords)
+            })
+                console.log('Got watch', this.state.watchId);
+        } catch(error) {
+            console.error('Error occurred. Error code: ' + error.code);
+        }
+    }
+          
+    lookAtPosition2 = () => {
+        try {
+            this.state.watchId2 = Plugins.Geolocation.watchPosition({
+                enableHighAccuracy: false,
+                maximumAge: 10000,
+                requireAltitude: false,
+                timeout: Infinity
+            }, (position, error) => {
+                console.log("watchLocation2", position.coords)
+            })
+            console.log('Got watch', this.state.watchId);
+        } catch(error) {
+            console.error('Error occurred. Error code: ' + error.code);
+        }
+    }
 
     render () {
-        // const { mapEle, map } = this.state
-        this.getCurrentPosition()
         return (
-            <div className="map-canvas"></div>
+            <IonContent>
+                <div className="map-canvas"></div>
+            </IonContent>
         );
     }
 }
-export default Mapp;
-//   useEffect(() => {
-
-
-    // addMarkers();
-
-    // google.maps.event.addListenerOnce(map.current, 'idle', () => {
-    //   if (mapEle.current) {
-    //     mapEle.current.classList.add('show-map');
-    //   }
-    // });
-
-    // function addMarkers() {
-    //   locations.forEach((markerData) => {
-    //     let infoWindow = new google.maps.InfoWindow({
-    //       content: `<h5>${markerData.name}</h5>`
-    //     });
-  
-    //     let marker = new google.maps.Marker({
-    //       position: new google.maps.LatLng(markerData.lat, markerData.lng),
-    //       map: map.current!,
-    //       title: markerData.name
-    //     });
-  
-    //     marker.addListener('click', () => {
-    //       infoWindow.open(map.current!, marker);
-    //     });
-    //   });
-    // }
-
-//   }, [mapCenter, locations]);
-
-// }
-
-// export default Map;
+export default withIonLifeCycle(Mapp);

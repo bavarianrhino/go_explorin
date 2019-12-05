@@ -50,7 +50,7 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
             loading: true,
             userData: {}
         }
-
+        
     ionViewWillEnter = async () => {
         const { userSession } = this.state
 
@@ -71,7 +71,7 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
         return (
             <IonApp>
                 {/* {(!this.userSignedIn()) ? <Loading /> : */}
-                {(!userSession.isUserSignedIn()) ? <Login userSession={userSession} history={this.props} /> :
+                {(!userSession.isSignInPending()) ? <Login userSession={userSession} history={this.props} /> :
                 <IonReactRouter>
                     <IonTabs>
                         <IonRouterOutlet>
