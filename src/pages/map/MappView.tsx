@@ -1,5 +1,5 @@
 import React from 'react';
-import Mapp from './/Mapp';
+import Mapp from './Mapp';
 import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonPage } from '@ionic/react';
 // import { Location } from '../models/Location';
 // import { connect } from '../data/connect';
@@ -35,20 +35,3 @@ const MappView: React.FC = () => {
     )};
 
 export default MappView
-
-
-// var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
- 
-// mapboxgl.accessToken = 'keyiubdiwebiwebc';
-// var map = new mapboxgl.Map({
-// container: 'YOUR_CONTAINER_ELEMENT_ID',
-// style: 'mapbox://styles/mapbox/streets-v11'
-// });
-
-// export default connect<OwnProps, StateProps, DispatchProps>({
-//   mapStateToProps: (state) => ({
-//     locations: state.data.locations,
-//     mapCenter: selectors.mapCenter(state)
-//   }),
-//   component: MappView
-// });
