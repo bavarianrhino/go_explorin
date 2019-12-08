@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonProgressBar, IonContent, IonSpinner, IonButton } from '@ionic/react';
+import { IonContent, IonButton } from '@ionic/react';
 
 // export const Loading: React.FC = () => (
     export default class Logout extends React.Component {

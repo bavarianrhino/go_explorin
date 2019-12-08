@@ -1,10 +1,10 @@
 import React from 'react';
-import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonFab, IonFabButton, IonIcon, IonButton, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonRow, IonCol } from '@ionic/react'; //, IonCard, IonFab, IonFabButton, IonIcon, IonButton, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave,
 import PropTypes from 'prop-types'
 import Loading from '../loading/Loading'
 import { UserSession } from 'blockstack';
-import { useParams } from 'react-router';
-import { useStore } from 'react-redux';
+// import { useParams } from 'react-router';
+// import { useStore } from 'react-redux';
 import { appConfig } from '../../utils/constants'; //appConfig
 import { BlockstackButton } from 'react-blockstack-button';
 
@@ -98,19 +98,26 @@ export default class Login extends React.Component {
                         <IonTitle>Login</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                {(loading) ? <Loading /> : 
-                (this.state.userSession.isSignInPending()) ? (this.handleClick2(null)) :
-                <IonContent className="ion-padding" style={{ '--offset-top': '-40%' }}>
-                    {/* <IonButton shape="round" expand="block" fill="outline" color="tertiary" onClick={e => {e.preventDefault(); this.handleClick2(e); }}>Blockstack Login</IonButton> */}
-                    <BlockstackButton onClick={e => {this.handleClick2(e)}} />
-                </IonContent>}
+                <IonContent>
+                    <IonGrid>
+                        <IonRow class="ion-justify-content-center" style={{ 'margin': '40% auto' }}>
+                            <IonCol size='auto'>
+                                {(loading) ? <Loading /> :
+                                    (this.state.userSession.isSignInPending()) ? (this.handleClick2(null)) :
+                                        <BlockstackButton onClick={e => {this.handleClick2(e)}} />
+                                }
+                            </IonCol>
+                        </IonRow>
+                    </IonGrid>
+                </IonContent>
             </IonPage>
         )
     }
 }
-// export default Login;
-{/* <IonFab vertical="center" horizontal="end" slot="fixed">
+/* <IonButton shape="round" expand="block" fill="outline" color="tertiary" onClick={e => {e.preventDefault(); this.handleClick2(e); }}>Blockstack Login</IonButton>
+export default Login;
+<IonFab vertical="center" horizontal="end" slot="fixed">
 <IonFabButton onClick={e => {e.preventDefault(); this.handleClick2(e); }}>
 <IonIcon name="add" />
 </IonFabButton>
-</IonFab> */}
+</IonFab> */

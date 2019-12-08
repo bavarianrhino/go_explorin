@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
-import { IonApp, IonPage, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel, IonIcon } from '@ionic/react';
+import { Redirect, Route } from 'react-router-dom';
+// import { RouteComponentProps } from 'react-router-dom';
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonLabel, IonIcon, withIonLifeCycle } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { withIonLifeCycle } from '@ionic/react';
+// import PropTypes from 'prop-types'
 // IonHeader, IonPage, IonToolbar, IonTitle, IonContent,
 
 import Login from './pages/login/Login';
@@ -15,8 +15,8 @@ import Logout from './pages/logout/Logout';
 // Blockstack
 import { appConfig } from './utils/constants'; //appConfig
 import { UserSession } from 'blockstack'
-import { connect } from 'react-redux';
-import { setUserSession } from './actions/userActions';
+// import { connect } from 'react-redux';
+// import { setUserSession } from './actions/userActions';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,10 +35,10 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { share, map } from 'ionicons/icons';
+import { share } from 'ionicons/icons';
 import { locate } from 'ionicons/icons';
 import { close } from 'ionicons/icons';
-import { attachProps } from '@ionic/react/dist/types/components/utils/attachProps';
+// import { attachProps } from '@ionic/react/dist/types/components/utils/attachProps';
 
     // const App: React.FunctionComponent = () => {
     // interface AppProps extends RouteComponentProps<{userSession: string;}> {}
@@ -80,6 +80,7 @@ import { attachProps } from '@ionic/react/dist/types/components/utils/attachProp
                             <Route path="/LeaderBoard" component={LeaderBoard} exact={true} />
                             <Route path="/map" component={MappView} exact={true} />
                             <Route path="/logout" component={Logout} exact={true} />
+                            <Route path="/loading" component={Loading} exact={true} />
                             <Route path="/" render={() => <Redirect to="/map" />} exact={true} />
                             {/* <Route path="/" render={() => (this.userSignedIn() ? <Redirect to="/map" /> : <Redirect to="/loading" />)} exact={true} /> */}
                             {/* <Route path="/" render={(props) => (!userSession.isUserSignedIn() ? <Login userSession={userSession} /> : <Redirect to="/map" /> )} /> */}

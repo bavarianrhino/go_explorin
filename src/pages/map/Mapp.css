@@ -1,0 +1,33 @@
+/* .map-div > * {
+    flex: 1 1 0% !important;
+    overflow: visible !important;
+    height: 85vh !important;
+} */
+
+canvas {
+    /* flex: 1 1 0% !important; */
+    overflow: visible !important;
+    height: 88vh !important;
+    width: auto !important;
+    position: absolute !important;
+}
+
+.mapboxgl-canvas {
+    /* flex: 1 !important; */
+    overflow: visible !important;
+    height: 88vh !important;
+    width: auto !important;
+    position: absolute !important;
+}
+
+/* canvas > .mapboxgl-canvas {
+    flex: 1 1 0% !important;
+    overflow: visible !important;
+    height: 88vh !important;
+}
+
+canvas .mapboxgl-canvas {
+    flex: 1 1 0% !important;
+    overflow: visible !important;
+    height: 88vh !important;
+} */

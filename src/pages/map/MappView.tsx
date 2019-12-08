@@ -1,6 +1,6 @@
 import React from 'react';
 import Mapp from './Mapp';
-import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonPage } from '@ionic/react';
+import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonPage } from '@ionic/react'; //IonContent,
 // import { Location } from '../models/Location';
 // import { connect } from '../data/connect';
 // import * as selectors from '../data/selectors';
@@ -27,10 +27,10 @@ const MappView: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
 
-            <IonContent class="map-page">
+            {/* <IonContent class="map-page"> */}
                 {/* <Map locations={locations} mapCenter={mapCenter} /> */}
                 <Mapp />
-            </IonContent>
+            {/* </IonContent> */}
         </IonPage>
     )};
 
