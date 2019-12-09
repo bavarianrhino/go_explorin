@@ -1,14 +1,66 @@
 import React from 'react';
 import { Plugins } from '@capacitor/core';
 import { IonContent, IonGrid, IonRow, IonCol, withIonLifeCycle } from '@ionic/react';
-
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl"; //Source
-
 import Loading from '../loading/Loading'
-
 import './Mapp.css';
-
 import { coordinatesData } from '../../utils/data';
+
+//////////// GEO COORDS FOG LOGIC //////////////
+
+// const PI = 3.14159265;
+// const TWOPI = 2*PI;
+// function isCoordinateInsidePitch(latitude, longitude, latArray, longArray, l) {       
+//         let angle=0;
+//         let p1Lat;
+//         let p1Long;
+//         let p2Lat;
+//         let p2Long;
+//         let n = l
+
+//         for (let i = 0; i < n; i++) {
+//             p1Lat = latArray[i] - latitude;
+//             p1Long = longArray[i] - longitude;
+//             p2Lat = latArray[(i+1)%n] - latitude;
+//             p2Long = longArray[(i+1)%n] - longitude;
+//             debugger
+//             angle += angle2D(p1Lat,p1Long,p2Lat,p2Long);
+//         }
+
+//         return !(Math.abs(angle) < PI);
+// }
+    
+// function angle2D(y1, x1, y2, x2) {
+//     let dtheta,theta1,theta2;
+
+//     theta1 = Math.atan2(y1,x1);
+//     theta2 = Math.atan2(y2,x2);
+//     dtheta = theta2 - theta1;
+//     while (dtheta > PI)
+//         dtheta -= TWOPI;
+//     while (dtheta < -PI)
+//         dtheta += TWOPI;
+
+//     return dtheta;
+// }
+    
+// function isValidCoordinate(lattt,looong) {
+//     debugger
+//     return (
+//     lattt !== '' && looong !== '' && !isNaN(lattt) 
+//         && !isNaN(looong) && lattt > -90 &&
+//         lattt < 90 && looong > -180 && looong < 180
+//         )
+// }
+// let lattt = 39.962169;
+// let looong = -82.893004;
+// // Lat 
+// let arrayla = [40.322549, 40.138023, 39.86872, 39.445821, 39.343939, 39.020334, 38.609443, 38.471953, 38.057908, 37.867350, 37.362602, 37.537040, 37.676297, 37.971352, 38.81518, 38.746670, 38.213451, 39.122686, 38.265225, 38.72953, 39.360930, 39.598364, 40.171610, 40.939533, 41.005893, 41.583687, 41.583687, 41.632977, 41.287175, 41.270662, 40.989309, 40.690092];
+// let arraylo = [-78.543860, -77.906653, -77.906653, -77.862708, -77.269446, -76.851966, -76.895911, -77.027747, -77.730872, -78.170325, -78.126380, -78.829505, -79.510657, -80.543372, -80.807044, -81.378333, -82.169348, -83.202063, -83.421790, -83.817298, -84.322669, -84.388587, -84.322669, -84.037024, -83.114173, -82.323157, -81.532141, -80.235755, -79.049231, -78.499915, -78.170325, -78.390052];
+// let lleng = arrayla.length;
+// console.log(isCoordinateInsidePitch(lattt, looong, arrayla, arraylo, lleng));
+// console.log(isValidCoordinate(lattt, looong));
+
 
 class Mapp extends React.Component {
 
